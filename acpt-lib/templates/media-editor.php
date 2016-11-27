@@ -1,4 +1,10 @@
 <?php
+if (!defined ('ABSPATH')) {
+    exit;
+}
+
+use acpt_plugin_ns\acpt_lib\WP_Copy;
+
 $open = isset( $_GET['image-editor'] );
 if ( $open )
     require_once ABSPATH . 'wp-admin/includes/image-edit.php';
@@ -6,7 +12,7 @@ $thumb_url = false;
 if ( $attachment_id = intval( $post->ID ) ) {
     $thumb_url = wp_get_attachment_image_src($attachment_id, array(900, 450), true);
 }
-$img_url = ACPT_WP::get_attachment_url( $post->ID );
+$img_url = WP_Copy::get_attachment_url( $post->ID );
 $alt_text = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
 $att_url = wp_get_attachment_url( $post->ID ); ?>
     <div class="wp_attachment_holder wp-clearfix">
